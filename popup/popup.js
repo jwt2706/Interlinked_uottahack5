@@ -1,14 +1,13 @@
 let numOfComments = 0;
-let numHTML = document.getElementById("num").innerHTML;
-numHTML = "There are "+numOfComments+" comments on this page.";
+document.getElementById("num").innerHTML = "There are "+numOfComments+" comments on this page.";
 
-function bruh() {
-    alert("fard");
+//const para = document.createElement("p");
+//para.innerHTML = "This is a paragraph.";
+//document.getElementById("comments").appendChild(para);
 
+for (let i=0;i<5;i++) {
+    window["currentMsg"]=i;
+    currentMsg = document.createElement("p");
+    currentMsg.innerHTML = "<strong>"+i+". This is a paragraph.";
+    document.getElementById("comments").appendChild(currentMsg);
 }
-
-/*numOfComments++;
-numHTML = "There are "+numOfComments+" comments on this page.";
-let element = document.getElementsByClassName("GridItemStats--1wyj6t9 fYzdSX");
-let newElement = '<div id="two">two</div>'
-element.insertAdjacentHTML( 'afterend', newElement )*/

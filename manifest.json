@@ -8,11 +8,15 @@
               "48": "logo/logo-48.png",
               "128": "logo/logo-128.png" },
   
-
+    "actions" : {
+        "default_title": "Interlinked",
+        "default_popup": "popup/popup.html"
+    },
 
     "author": "Peter Bou-Farah, Sam Pich, Jacob Taylor, Lucas Graham",
 
     
+
     "permissions": [],
     "host_permissions": [
         "*://*/*"

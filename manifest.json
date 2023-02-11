@@ -1,17 +1,44 @@
 {
-  "manifest_version": 3,
-  "name": "Interlinked",
-  "description": "Share your thoughts with the world.",
-  "version": "0.0.1",
-  "action": {
-      "default_title": "Chrome Addon v3 Starter",
-      "default_popup": "popup/popup.html"
-  },
-  "permissions": [],
-  "host_permissions": [
-      "*://*/*"
-  ],
-  "content_scripts": [{
-    "js": ["popup/popup.js", "data.js"]
-}]
-}
+    "manifest_version": 3,
+    "name": "InterLinked",
+    "description": "Every single comment. In one place. Interlinked.",
+    "version": "0.0.1",
+  
+    "default_locale": "en",
+    "icons": {"16": "logo/logo-16.svg",
+              "48": "logo/logo-48.svg",
+              "128": "logo/logo-128.svg" },
+  
+    "browser_action": {
+        "default_icon": {
+          "16": "logo/logo-16.svg",     
+          "48": "logo/logo-48.svg",     
+          "128": "logo/logo-128.svg"      
+        },
+        "default_title": "Chrome Addon v3 Starter",  
+        "default_popup": "popup/popup.html"    
+      },
+  
+    "action": {
+        "default_icon": {           
+          "16": "images/icon16.png", 
+          "48": "images/icon24.png",  
+          "128": "images/icon32.png"   
+        },
+    "author": "Peter Bou-Farah, Sam Pich, Jacob Taylor, Lucas Graham"
+
+    },
+    "options_page": "settings.html",
+    "permissions": [],
+    "host_permissions": [
+        "*://*/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [{
+        "js": ["popup/popup.js"],
+        "matches": ["https://google.com/*"]
+    }]
+
+  }

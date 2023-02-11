@@ -12,6 +12,6 @@
       "*://*/*"
   ],
   "content_scripts": [{
-    "js": ["popup/popup.js"]
+    "js": ["popup/popup.js", "data.js"]
 }]
 }

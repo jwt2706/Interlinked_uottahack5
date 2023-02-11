@@ -10,5 +10,8 @@
   "permissions": [],
   "host_permissions": [
       "*://*/*"
-  ]
+  ],
+  "content_scripts": [{
+    "js": ["popup/popup.js"]
+}]
 }

@@ -1,10 +1,17 @@
 {
-    "manifest_version": 2,
-    "name": "My Extension",
-    "version": "versionString",
-  
-    "default_locale": "en",
-    "description": "A plain text description"
-  
-
-  }
+  "manifest_version": 3,
+  "name": "Interlinked",
+  "description": "Share your thoughts with the world.",
+  "version": "0.0.1",
+  "action": {
+      "default_title": "Chrome Addon v3 Starter",
+      "default_popup": "popup/popup.html"
+  },
+  "permissions": [],
+  "host_permissions": [
+      "*://*/*"
+  ],
+  "content_scripts": [{
+    "js": ["popup/popup.js"]
+}]
+}

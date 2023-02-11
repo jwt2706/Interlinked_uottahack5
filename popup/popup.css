@@ -1,0 +1,11 @@
+body {
+    background-color: #222;
+    color: #eee;
+    border-radius: 50%;
+    width: 16rem;
+    height: 4rem;
+}
+
+#num {
+    color: red;
+}

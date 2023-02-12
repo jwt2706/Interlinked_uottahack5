@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 
 import express, { json, Router } from 'express';
 
-const uri = "";
+const uri = process.env.uri
 const client = new MongoClient(uri);
 console.log('Connecting to MongoDB Atlas cluster...');
 await client.connect();
@@ -41,6 +41,7 @@ async function getComments(client, website) {
     return Object.values(websites[0][website].comments);
 
 };
+
 app.listen(3000, () => {
-    console.log(`Server Started at ${3000}`)
+    console.log(`Backend server is running on 3000`);
 });

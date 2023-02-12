@@ -16,6 +16,11 @@ try {
     app.get('/comments', async (req, res) => {
         try {
             const comments = await getComments(client, req.query.website)
+            if (!comments) {
+                res.status(404).send("There are 0 comments for this webpage.");
+                // stop further execution in this callback
+                return;
+            }
             console.log(comments)
             console.log("Returned " + Object.values(comments).length + " comments for website '" + req.query.website+"'");
             // for (var i = 0; i < comments.length; i++) {
@@ -37,11 +42,19 @@ async function getComments(client, website) {
     const interlinkedDatabase = client.db('interlinked');
     const websitesCollection = interlinkedDatabase.collection('websites');
     const websites = await websitesCollection.find({}).toArray();
-    // console.log(websites[0]);
-    return Object.values(websites[0][website].comments);
+    console.log(websites[0]);
+    console.log(websites[0].hasOwnProperty(website))
+    if (websites[0].hasOwnProperty(website)) {
+        console.log("Website has comments!")
+        return Object.values(websites[0][website].comments); 
+    }
+    else {
+        console.log("Website '"+ website+"' has no comments!")
+        return false
+    }
 
 };
 
 app.listen(3000, () => {
-    console.log(`Backend server is running on 3000`);
+    console.log('Backend server is running on 3000');
 });

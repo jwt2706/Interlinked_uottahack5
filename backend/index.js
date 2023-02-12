@@ -1,111 +1,46 @@
-const {MongoClient} = require('mongodb');
+import { MongoClient } from 'mongodb';
 
-const express = require('express');
-const mongoose = require('mongoose');
+import express, { json, Router } from 'express';
+
+const uri = "mongodb+srv://Interlinked:uottahack5interlinked@interlinkednew.9t7atmk.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
+console.log('Connecting to MongoDB Atlas cluster...');
+await client.connect();
+console.log('Successfully connected to MongoDB Atlas!');
 
 const app = express();
 
-app.use(express.json());
+app.use(json());
 
-app.listen(3000, () => {
-    console.log(`Server Started at ${3000}`)
-})
-
-const router = express.Router()
-
-module.exports = router;
-
-// app.get('/comments/:website', function (req, res) {
-//     res.send(req.params.website)
-// });
-
-// //Post Method
-// router.post('/post', (req, res) => {
-//     res.send('Post API')
-// })
-
-// //Get all Method
-// router.get('/getAll', (req, res) => {
-//     res.send('Get All API')
-// })
-
-// //Get by ID Method
-// router.get('/getOne/:id', (req, res) => {
-//     res.send('Get by ID API')
-// })
-
-// //Update by ID Method
-// router.patch('/update/:id', (req, res) => {
-//     res.send('Update by ID API')
-// })
-
-// router.get("/", (req, res) => {
-//     res.json({ message: "Hello World." });
-//     console.log(res);
-//   });
-
-// //Delete by ID Method
-// router.delete('/delete/:id', (req, res) => {
-//     res.send('Delete by ID API')
-// })
-
-async function main(){
-    /**
-     * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
-     * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
-     */
-    const uri = "mongodb+srv://Interlinked:uottahack5interlinked@interlinked.9t7atmk.mongodb.net/?retryWrites=true&w=majority";
- 
-
-    const client = new MongoClient(uri);
- 
-    try {
-        await client.connect();
-        // await  listDatabases(client);
-        // await  listFiles(client);
-        const interlinkedDatabase = client.db('interlinked');
-        const websitesCollection = interlinkedDatabase.collection('websites');
-        app.get('/comments/:website', function (req, res) {
-            // res.send(req.params.website)
-            (async () => {
-                res.send(await getComments(client, req.params.website));
-            })()
-        });
-
-        
- 
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
+try {
+    app.get('/comments', async (req, res) => {
+        try {
+            const comments = await getComments(client, req.query.website)
+            console.log(comments)
+            console.log("Returned " + Object.values(comments).length + " comments for website '" + req.query.website+"'");
+            // for (var i = 0; i < comments.length; i++) {
+            //     console.log("Comment " + (i + 1) + ": " + comments[i].comment);
+            //     console.log("Comment " + (i + 1) + " author: " + comments[i].author);
+            //     console.log("Comment " + (i + 1) + " date: " + comments[i].date);
+            //     console.log("Comment " + (i + 1) + " likes: " + comments[i].likes);
+            // }
+            res.json(comments);
+            } catch (err) {
+              res.status(500).send(err.message);
+        }
+    });
+} catch (e) {
+    console.error(e);
 }
-
-async function listDatabases(client){
-    databasesList = await client.db().admin().listDatabases();
- 
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
 
 async function getComments(client, website) {
     const interlinkedDatabase = client.db('interlinked');
     const websitesCollection = interlinkedDatabase.collection('websites');
     const websites = await websitesCollection.find({}).toArray();
-    // console.log(JSON.stringify(websites, null, 2));
-    // console.log(websites[0]['https://wikipedia.com']);
-    console.log(website);
-    // console.log(websites[0][website]);
-    // return(websites[0]['' + website + ' '])
-    return website
+    // console.log(websites[0]);
+    return Object.values(websites[0][website].comments);
 
 };
-
-async function listFiles(client) {
-    const websites = await websitesCollection.find({}).toArray();
-    console.log(JSON.stringify(websites, null, 2));
-    console.log(websites[0]['https://wikipedia.com']);
-
-};
-
-main().catch(console.error);
+app.listen(3000, () => {
+    console.log(`Server Started at ${3000}`)
+});

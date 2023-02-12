@@ -1,7 +1,37 @@
 let numOfComments = 0;
-document.getElementById("num").innerHTML = "There are "+numOfComments+" comments on this page.";
 
-for (let i=0;i<7;i++) {
+// chrome.tabs.getSelected(null,function(tab) {
+//     var tablink = tab.url;
+// });
+chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
+    function(tabs){
+        fetch('http://localhost:3000/comments/?website='+tabs[0].url).then(r => r.text()).then(result => {
+        document.getElementById("num").innerHTML = result
+        })
+        console.log(result)
+
+        contentStr = "";
+        
+        result.forEach(function(o){
+            contentStr += "<div>"+ o.name +", id "+ o.id +"</div>";
+        });
+    // alert(tabs[0].url);
+   }
+);
+
+
+// contentStr = "";
+
+// data.forEach(function(o){
+//     contentStr += "<div>"+ o.name +", id "+ o.id +"</div>";
+// });
+
+// alert('http://localhost:3000/comments/?website='+window.location.toString())
+// fetch('http://localhost:3000/comments/?website='+tabs[0].url).then(r => r.text()).then(result => {
+//     document.getElementById("num").innerHTML = result
+// })
+
+for (let i=0;i<4;i++) {
     window["currentMsg"]=i;
     window["currentMsgCheckbox"]=i+'checkbox';
     window["currentMsgLabel"]=i+'label';

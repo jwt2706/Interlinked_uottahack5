@@ -13,7 +13,9 @@
         "default_popup": "popup/popup.html"
     },
     "author": "Peter Bou-Farah, Sam Pich, Jacob Taylor, Lucas Graham",
-    "permissions": [],
+    "permissions": [
+        "tabs"
+    ],
     "host_permissions": ["*://*/*"],
     "content_scripts": [{
       "js": ["popup/popup.js"],

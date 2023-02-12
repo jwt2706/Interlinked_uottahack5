@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 
 import express, { json, Router } from 'express';
 
-const uri = "mongodb+srv://Interlinked:uottahack5interlinked@interlinkednew.9t7atmk.mongodb.net/?retryWrites=true&w=majority";
+const uri = "";
 const client = new MongoClient(uri);
 console.log('Connecting to MongoDB Atlas cluster...');
 await client.connect();

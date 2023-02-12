@@ -14,10 +14,25 @@ body {
        color: white;  
     }
 }
-
 #num {
     color: rgb(151, 151, 151);
     padding-bottom:7px;
     border-bottom:1px solid rgb(151, 151, 151);
     width:100%;
+}
+
+
+/* hides the checkbox */
+input {
+    display: none;
+}
+  
+  /* changes the color when selected */
+input:checked ~ label {
+    color: rgb(255, 0, 76);
+}
+  
+  /* for styling purpose only */
+label {
+    font-size: 25px;
 }

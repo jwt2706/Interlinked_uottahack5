@@ -30,7 +30,7 @@ Our project is a **chromium based web extension** that essenially acts as a **un
 
 - [Peter 💻⚙️](https://www.github.com/peter-bf)
 - [Jacob 👀📸](https://github.com/jwt2706)
-- [Sam Pich 📄✏](https://github.com/sam-pich)
+- [Sam 📄✏](https://github.com/sam-pich)
 - [Lucas 📂🔗](https://www.github.com/peter-bf)
 
 

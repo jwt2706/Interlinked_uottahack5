@@ -8,7 +8,7 @@ Our project is a **chromium based web extension** that essenially acts as a **un
 
 ## Features 
 
-- Full REST-API (get, post) intergration:
+- Full **REST-API** (**GET**, **POST**) intergration:
     - **Post** comments ✍️
     - **Get** comments 👀
     - **Like** comments ❤️
